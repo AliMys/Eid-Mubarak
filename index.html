@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Idul Fitri 1447H</title>
+
+<!-- 🕌 Font Islami FULL -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="opening" id="opening">
+    <div class="envelope" onclick="openCard()">
+        Klik untuk membuka ✉️
+    </div>
+</div>
+
+<script>
+for(let i=0;i<100;i++){
+    let star=document.createElement("div");
+    star.className="star";
+    star.style.top=Math.random()*100+"%";
+    star.style.left=Math.random()*100+"%";
+    star.style.animationDuration=(Math.random()*3+1)+"s";
+    document.body.appendChild(star);
+}
+</script>
+
+<div class="card" id="card">
+
+    <div class="moon">🌙</div>
+
+    <h1>عيد مبارك</h1>
+    <h2>Selamat Hari Raya Idul Fitri 1447 H</h2>
+
+    <p>
+        Minal Aidin Wal Faizin✨<br>
+        Mohon Maaf Lahir Dan Batin <br>
+        Jika Ada Salah, Saya Minta THR <br>
+        Cukup Sekian Terima Gaji, Ehh Langsung Habis Lagi <br>
+        Udah Gitu aja. Salam SCTV <br>
+    </p>
+
+    <button onclick="playMusic()">Putar Musik 🎶</button>
+
+    <div class="footer">Dari Saya Ali 🗿 </div>
+</div>
+
+<audio id="music">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<canvas id="confetti"></canvas>
+
+<script>
+const card = document.getElementById("card");
+const opening = document.getElementById("opening");
+
+function openCard(){
+    opening.style.opacity = "0";
+    setTimeout(()=>{
+        opening.style.display="none";
+        card.classList.add("show");
+        startConfetti();
+    },800);
+}
+
+function playMusic(){
+    document.getElementById("music").play();
+}
+
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let pieces = [];
+
+for(let i=0;i<120;i++){
+    pieces.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        size: Math.random()*5+2,
+        speed: Math.random()*3+1
+    });
+}
+
+function startConfetti(){
+    function update(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle = "gold";
+        pieces.forEach(p=>{
+            ctx.fillRect(p.x,p.y,p.size,p.size);
+            p.y += p.speed;
+            if(p.y > canvas.height) p.y = 0;
+        });
+        requestAnimationFrame(update);
+    }
+    update();
+}
+</script>
+
+</body>
+</html>
